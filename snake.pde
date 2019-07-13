@@ -6,6 +6,10 @@ boolean hasFood;
 String direction;
 int numRect;
 float speed; 
+int r_c = 20; //holds number of rows and cols
+int xmovement;
+int ymovement;
+int food[] = new int[2];
 
 
 void setup() {
@@ -19,7 +23,7 @@ void setup() {
   numRect = 1;
   speed = 1;
   grid = new boolean[20][20];
-  frameRate(5);
+  frameRate(10);
   
   
   for (int i = 0; i < 20; i++)
@@ -37,61 +41,100 @@ void draw() {
   //  line(0, i, width, i);
     
   //}
-  
+  background(255,218,185);
   drawRects();
-  spawnFood();
-  posy++;
-  grid[posx][posy] = true;
+
+
+  fill(0, 255, 0, 100);
+  rect(food[0] * 30, food[1] * 30, 30, 30);
+}
+
+void update() {
+  if (posx != 19){
+    if (xmovement == 1){
+      posx += xmovement;
+      grid[posx][posy] = true;
+    }
+  }
+  else {
+    grid[posx][posy] = true;
+  }
+  if (posy != 19){
+    if (ymovement == 1){
+      posy += ymovement;
+      grid[posx][posy] = true;
+    }
+  }
+  else {
+    grid[posx][posy] = true;
+  }
+  if (posx != 0){
+    if (xmovement == -1){
+      posx += xmovement;
+      grid[posx][posy] = true;
+    }
+  }
+  else {
+    grid[posx][posy] = true;
+  }
+  if (posy != 0){
+    if (ymovement == -1){
+      posy += ymovement;
+      grid[posx][posy] = true;
+    }
+  }
+  else {
+    grid[posx][posy] = true;
+  }
   
+  if (!hasFood) {
+    spawnFood();  
+  }
 }
 
 
 
 void drawRects() {
-  for (int i = 0; i < 20; i++)
-    for (int j = 0; j < 20; j++) {
+  update();
+  for (int i = 0; i < r_c
+  ; i++)
+    for (int j = 0; j < r_c; j++) {
       if (grid[i][j]) {
         fill(255, 0, 0, 100);
         rect(i * 30, j * 30, 30, 30);
-        fill(0);
+        grid[i][j] = false;
       }
     }
 }
 
 
-void spawnFood() {
-  
-  if (!hasFood) {
-    int foodX = int(random(0, 20));
-    int foodY = int(random(0, 20));
-    fill(0, 255, 0, 100);
-    rect(foodX * 30, foodY * 30, 30, 30);
-    fill(0);
-    hasFood = true;
-  }
-  
+int[] spawnFood() {
+  hasFood = true;
+  food[0] = int(random(0, r_c));
+  food[1] = int(random(0, r_c));
+  return food;  
 }
 
 
 void keyPressed() {
   if (key == 'd') {
-    posx ++;
-    grid[posx][posy] = true;
+    xmovement = 1;
+    ymovement = 0;
   }
   
   if (key == 'w') {
-    posy--;
-    grid[posx][posy] = true;
+    ymovement = -1;
+    xmovement = 0;
   }
   
   if (key == 'a') {
-    posx --;
-    grid[posx][posy] = true;
+    xmovement = -1;
+    ymovement = 0;
   }
   
   if (key == 's') {
-    posy++;
-    grid[posx][posy] = true;
+    ymovement = 1;
+    xmovement = 0;
   }
   
 }
