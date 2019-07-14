@@ -74,6 +74,7 @@ void update() {
   }
   
   grid[posx][posy] = true;
+  edgeDirection();
   
   if (!hasFood) {
     spawnFood();  
@@ -126,4 +127,29 @@ void keyPressed() {
     xmovement = 0;
   }
   
+}
+
+void edgeDirection () {
+  if (xmovement == -1)
+    if (posx == 0){
+      ymovement = -1;
+      xmovement = 0;
+    }
+  if (xmovement == 1)
+    if (posx == 19){
+      ymovement = 1;
+      xmovement = 0;
+    }
+  if (ymovement == -1)
+    if (posy == 0){
+      ymovement = 0;
+      xmovement = 1;
+    }
+  if (ymovement == 1)
+    if (posy == 19){
+      ymovement = 0;
+      xmovement = -1;
+    }
+
+
 }
