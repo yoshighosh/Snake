@@ -42,6 +42,9 @@ void draw() {
     
   //}
   drawRects();
+  if(posx == food[0] && posy == food[1]){
+    hasFood = false;
+  }
 
 
   fill(0, 255, 0, 100);
