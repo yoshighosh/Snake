@@ -23,7 +23,7 @@ void setup() {
   numRect = 1;
   speed = 1;
   grid = new boolean[20][20];
-  frameRate(10);
+  frameRate(7);
   
   
   for (int i = 0; i < 20; i++)
@@ -41,7 +41,6 @@ void draw() {
   //  line(0, i, width, i);
     
   //}
-  background(255,218,185);
   drawRects();
 
 
@@ -53,39 +52,25 @@ void update() {
   if (posx != 19){
     if (xmovement == 1){
       posx += xmovement;
-      grid[posx][posy] = true;
     }
-  }
-  else {
-    grid[posx][posy] = true;
   }
   if (posy != 19){
     if (ymovement == 1){
       posy += ymovement;
-      grid[posx][posy] = true;
     }
-  }
-  else {
-    grid[posx][posy] = true;
   }
   if (posx != 0){
     if (xmovement == -1){
       posx += xmovement;
-      grid[posx][posy] = true;
     }
-  }
-  else {
-    grid[posx][posy] = true;
   }
   if (posy != 0){
     if (ymovement == -1){
       posy += ymovement;
-      grid[posx][posy] = true;
     }
   }
-  else {
-    grid[posx][posy] = true;
-  }
+  
+  grid[posx][posy] = true;
   
   if (!hasFood) {
     spawnFood();  
@@ -95,6 +80,7 @@ void update() {
 
 
 void drawRects() {
+  background(255,218,185);
   update();
   for (int i = 0; i < r_c
   ; i++)
